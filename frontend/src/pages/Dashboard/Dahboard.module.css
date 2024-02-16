@@ -1,0 +1,13 @@
+.dashboard {
+  padding: 10px;
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: rgb(231, 249, 249);
+  overflow-y: scroll;
+}
+.analytics_head{
+  margin: 10px 0 0 10px;
+  color: var(--dark-blue);
+}

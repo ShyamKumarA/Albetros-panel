@@ -1,0 +1,74 @@
+.AddBlogModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: transparent;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  background-color: rgba(15, 15, 15, 0.292);
+}
+.AddBlogModal .popup {
+  position: relative;
+  z-index: 3;
+  width: 40%;
+  height: 40%;
+  display: flex;
+  gap: 10px;
+  border-radius: 10px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.waring_cross {
+  padding: 1.5rem;
+  border: 1px solid red;
+  border-radius: 50%;
+  color: red;
+}
+.AddBlogModal .popup h1 {
+  color: var(--dark-blue);
+}
+.popup_closer {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: #206a79;
+  cursor: pointer;
+}
+.confirm_btns {
+  display: flex;
+  margin-top: 1rem;
+  gap: 2rem;
+}
+.cancel_btn {
+  padding: 10px;
+  width: 100px;
+  border-radius: 10px;
+  background-color: var(--dark-blue);
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+.delete_btn {
+  padding: 10px;
+  width: 100px;
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+@media screen and (max-width: 800px) {
+  .AddBlogModal .popup {
+    width: 80%;
+  }
+}

@@ -1,0 +1,49 @@
+.blog-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin: 3px;
+  padding: 20px 10px;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.blog-container .add-button {
+  padding: 10px;
+  width: 100px;
+  margin-left: auto;
+  border-radius: 10px;
+  background-color: var(--dark-blue);
+  color: white;
+  cursor: pointer;
+  border: none;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+.action_icons{
+cursor: pointer;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+table img {
+  max-width: 50px;
+  max-height: 50px;
+}
+
+.table-container {
+  width: 100%;
+  overflow-x: auto; /* or 'scroll' */
+}
