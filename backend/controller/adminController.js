@@ -119,6 +119,8 @@ export const adminLogin = async (req, res, next) => {
 
 
 
+
+
   // export const addBlog = async (req, res, next) => {
   //   try {
   //     const {
@@ -202,3 +204,31 @@ export const adminLogin = async (req, res, next) => {
   }
 
   }
+
+
+    // delete single blog
+export const deleteSingleBlog = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const adminId = req.admin._id;
+    const admin = await Admin.findById(adminId);
+
+    if (admin) {
+      const deletedBlog = await Blog.findByIdAndDelete(id);
+
+      if (deletedBlog) {
+        res.status(200).json({
+          deletedBlog,
+          sts: "01",
+          msg: "Blog deleted successfully",
+        });
+      } else {
+        next(errorHandler("Blog not found", 404));
+      }
+    } else {
+      next(errorHandler(401, "Admin not found"));
+    }
+  } catch (error) {
+    next(error);
+  }
+};
