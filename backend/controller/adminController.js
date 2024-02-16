@@ -68,9 +68,6 @@ export const adminLogin = async (req, res, next) => {
   };
 
 
-
-
-
   export const addBlog = async (req, res, next) => {
     try {
       upload(req, res, async function (err) {
@@ -78,42 +75,80 @@ export const adminLogin = async (req, res, next) => {
           return next(errorHandler(401, "File upload error"));
         }
   
-        const {
-          title, description, subTitle1, subDescription1,
-          subTitle2, subDescription2, subTitle3, subDescription3
-        } = req.body;
-  
+        const { title, description, sections } = req.body;
+        
         // Assuming the uploaded image is available in req.files.blogImage
         const blogImage = req.files.blogImage[0].filename;
-        console.log(blogImage);
         const adminId = req.admin._id;
         const admin = await Admin.findById(adminId);
   
-        if (admin) {
-          const blog = await Blog.create({
-            title, description, subTitle1, subDescription1,
-            subTitle2, subDescription2, subTitle3, subDescription3, blogImage
-          });
-  
-          const updatedBlog = await blog.save();
-          if (updatedBlog) {
-            return res.status(201).json({
-              sts: "01",
-              msg: "Blog Added Successfully",
-            });
-          } else {
-            return next(
-              errorHandler(401, "Verification failed. Please try again!")
-            );
-          }
-        } else {
+        if (!admin) {
           return next(errorHandler(401, "Admin not found"));
         }
+  
+        const blog = await Blog.create({
+          title,
+          description,
+          sections,
+          blogImage
+        });
+  
+        return res.status(201).json({
+          sts: "01",
+          msg: "Blog Added Successfully",
+        });
       });
     } catch (error) {
       next(error);
     }
   };
+
+
+
+
+  // export const addBlog = async (req, res, next) => {
+  //   try {
+  //     upload(req, res, async function (err) {
+  //       if (err) {
+  //         return next(errorHandler(401, "File upload error"));
+  //       }
+  
+  //       const {
+  //         title, description, subTitle1, subDescription1,
+  //         subTitle2, subDescription2, subTitle3, subDescription3
+  //       } = req.body;
+  
+  //       // Assuming the uploaded image is available in req.files.blogImage
+  //       const blogImage = req.files.blogImage[0].filename;
+  //       console.log(blogImage);
+  //       const adminId = req.admin._id;
+  //       const admin = await Admin.findById(adminId);
+  
+  //       if (admin) {
+  //         const blog = await Blog.create({
+  //           title, description, subTitle1, subDescription1,
+  //           subTitle2, subDescription2, subTitle3, subDescription3, blogImage
+  //         });
+  
+  //         const updatedBlog = await blog.save();
+  //         if (updatedBlog) {
+  //           return res.status(201).json({
+  //             sts: "01",
+  //             msg: "Blog Added Successfully",
+  //           });
+  //         } else {
+  //           return next(
+  //             errorHandler(401, "Verification failed. Please try again!")
+  //           );
+  //         }
+  //       } else {
+  //         return next(errorHandler(401, "Admin not found"));
+  //       }
+  //     });
+  //   } catch (error) {
+  //     next(error);
+  //   }
+  // };
   
 
 
