@@ -15,6 +15,8 @@ app.use(cookieParser());
 
 app.use("/api/admin", adminRouter);
 
+app.use("/uploads", express.static("uploads"));
+
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;
