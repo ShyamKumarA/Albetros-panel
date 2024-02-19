@@ -76,11 +76,15 @@ export const adminLogin = async (req, res, next) => {
         }
   
         const { title, description, sections } = req.body;
-        
-        // Assuming the uploaded image is available in req.files.blogImage
-        const blogImage = req.files.blogImage[0].filename;
-        const adminId = req.admin._id;
-        const admin = await Admin.findById(adminId);
+
+        if(!req.files.blogImage){
+          return next(errorHandler(401, "Image not found"));
+
+        }
+
+          const blogImage = req.files.blogImage[0].filename;
+          const adminId = req.admin._id;
+          const admin = await Admin.findById(adminId);
   
         if (!admin) {
           return next(errorHandler(401, "Admin not found"));
