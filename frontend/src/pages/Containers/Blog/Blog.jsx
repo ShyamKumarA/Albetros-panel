@@ -1,36 +1,18 @@
-import axios from 'axios';
 import AddBlog from '../AddBlog/AddBlog';
 import './Blog.css'
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
-import EditIcon from '@mui/icons-material/Edit';
+// import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteBlog from '../DeleteBlog/DeleteBlog';
-import EditBlog from '../EditBlog/EditBlog';
+// import EditBlog from '../EditBlog/EditBlog';
 
 
-const Blog = () => {
+const Blog = ({ blogs, fetchData }) => {
     const [addBlog, setAddBlog] = useState(false)
-    const [editBlog, setEditBlog] = useState(false)
+    // const [editBlog, setEditBlog] = useState(false)
+    const [blogId,setBlogId]=useState()
     const [deleteBlog, setDeleteBlog] = useState(false)
-    const [blogs, setBlogs] = useState([])
-
-    useEffect(() => {
-        // get blog datas
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('your_api_endpoint_here');
-                console.log(response.data);
-                setBlogs(response.data)
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchData();
-    }, [])
-
-
 
     // handle blog add modal
     
@@ -44,8 +26,9 @@ const Blog = () => {
 
     // handle blog delete modal
 
-    const OpenDeleteModal = () => {
+    const OpenDeleteModal = (Id) => {
         setDeleteBlog(true);
+        setBlogId(Id)
     }
 
     const closeDeleteModal = () => {
@@ -54,13 +37,13 @@ const Blog = () => {
 
     // handle blog delete modal
 
-    const OpenEditModal = () => {
-        setEditBlog(true);
-    }
+    // const OpenEditModal = () => {
+    //     setEditBlog(true);
+    // }
 
-    const closeEditModal = () => {
-        setEditBlog(false);
-    }
+    // const closeEditModal = () => {
+    //     setEditBlog(false);
+    // }
 
 
     return (
@@ -78,30 +61,40 @@ const Blog = () => {
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            {blogs.map((blog, index)=>(
+                                <tr key={blog._id}>
+                                    <td>{index+1}</td>
+                                    <td>{blog.title}</td>
+                                    <td>{blog.description}</td>
+                                <td className='action_icons'>
+                                    {/* <EditIcon onClick={OpenEditModal} style={{ color: "blue" }} /> */}
+                                <DeleteIcon onClick={() => OpenDeleteModal(blog._id)} style={{ color: "red" }} /></td>
+                            </tr>
+                            ))}
+                            {/* <tr>
                                 <td>1</td>
                                 <td>something</td>
                                 <td>Description</td>
-                                <td className='action_icons'><EditIcon onClick={OpenEditModal} style={{ color: "blue" }} /><DeleteIcon onClick={() => OpenDeleteModal(1)} style={{ color: "red" }} /></td>
+                                <td>
+                                    <EditIcon style={{ color: "blue" }} />
+                                    <DeleteIcon onClick={() => OpenDeleteModal(1)} style={{ color: "red" }} /></td>
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td>something</td>
                                 <td>Description</td>
-                                <td><EditIcon style={{ color: "blue" }} /><DeleteIcon style={{ color: "red" }} /></td>
+                                <td>
+                                    <EditIcon style={{ color: "blue" }} />
+                                    <DeleteIcon style={{ color: "red" }} /></td>
                             </tr>
                             <tr>
                                 <td>1</td>
                                 <td>something</td>
                                 <td>Description</td>
-                                <td><EditIcon style={{ color: "blue" }} /><DeleteIcon style={{ color: "red" }} /></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>something</td>
-                                <td>Description</td>
-                                <td><EditIcon style={{ color: "blue" }} /><DeleteIcon style={{ color: "red" }} /></td>
-                            </tr>
+                                <td>
+                                    <EditIcon style={{ color: "blue" }} />
+                                    <DeleteIcon style={{ color: "red" }} /></td>
+                            </tr> */}
                           
                         </tbody>
 
@@ -111,8 +104,8 @@ const Blog = () => {
 
             </div>
             {addBlog && <AddBlog handleClose={closeAddModal} />}
-            {deleteBlog && <DeleteBlog handleClose={closeDeleteModal} />}
-            {editBlog && <EditBlog handleClose={closeEditModal} />}
+            {deleteBlog && <DeleteBlog blogId={blogId} handleClose={closeDeleteModal} fetchData={fetchData}/>}
+            {/* {editBlog && <EditBlog handleClose={closeEditModal} />} */}
 
         </>
     )

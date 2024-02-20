@@ -23,6 +23,19 @@
   border: none;
   outline: none;
 }
+.log_out{
+    /* width: 7rem; */
+  padding: .6rem;
+  background-color: rgb(255, 255, 255);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: auto;
+}
 
 .menu-button {
   color: white;

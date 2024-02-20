@@ -31,7 +31,7 @@
   color: var(--dark-blue);
 }
 .input_container {
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   height: 500px;
   overflow: scroll;
@@ -78,9 +78,26 @@
   font-size: 15px;
   font-weight: 500;
 }
+.sub_container{
+  display: flex;
+  flex-direction: column;
+}
 .ok_btn {
   width: 7rem;
   padding: 1rem;
+  background-color: var(--dark-blue);
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 10px;
+  margin-left: auto;
+}
+.addField_btn{
+  max-width: 10rem;
+    padding: 1rem;
   background-color: var(--dark-blue);
   color: white;
   border-radius: 10px;

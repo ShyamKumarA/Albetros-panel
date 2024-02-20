@@ -1,11 +1,30 @@
 import React from 'react'
 import classes from './DeleteBlog.module.css'
 import CloseIcon from '@mui/icons-material/Close';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
-const DeleteBlog = ({ handleClose }) => {
-const handleDelete =()=>{
-    console.log("delete blog");
-}
+const DeleteBlog = ({ handleClose, blogId, fetchData }) => {
+    const handleDelete = async() => {
+const token = await localStorage.getItem('token')
+        const config= {
+            headers:{
+                Authorization: `Bearer ${token}`,
+                "content-type":"application/json",
+            }
+        }
+        axios.post(`http://localhost:8080/api/admin/delete-blog/${blogId}`,{},config)
+            .then((response) => {
+                console.log(response.data);
+                fetchData()
+                    handleClose()
+                
+            })
+            .catch((error) => {
+                console.error("Error during login request:", error);
+            });
+    
+    }
     return (
         <div className={classes.AddBlogModal}>
             <div className={classes.popup}>

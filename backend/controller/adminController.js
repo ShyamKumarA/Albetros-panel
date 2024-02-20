@@ -74,9 +74,10 @@ export const adminLogin = async (req, res, next) => {
         if (err) {
           return next(errorHandler(401, "File upload error"));
         }
-  
+        
         const { title, description, sections } = req.body;
-
+        
+        console.log(req.files);
         if(!req.files.blogImage){
           return next(errorHandler(401, "Image not found"));
 

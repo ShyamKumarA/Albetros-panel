@@ -5,7 +5,6 @@ import ArticleIcon from '@mui/icons-material/Article';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import PersonIcon from '@mui/icons-material/Person';
 import CloseIcon from '@mui/icons-material/Close';
-import { useNavigate } from "react-router-dom";
 const Sidebar = ({ viewSidebar, updateView }) => {
 
     return (
@@ -20,8 +19,7 @@ const Sidebar = ({ viewSidebar, updateView }) => {
             </div>
 
             <ul className="navlinks">
-                <a o
-                nClick={viewSidebar ? updateView : () => { }} href="#blogs">
+                <a onClick={viewSidebar ? updateView : () => { }} href="/dashboard">
                     <li>
                         <DashboardIcon />
                         Dashboard
@@ -41,12 +39,12 @@ const Sidebar = ({ viewSidebar, updateView }) => {
                         SEO
                     </li>
                 </a>
-                <a onClick={viewSidebar ? updateView : () => { }} href="#profile">
+                {/* <a onClick={viewSidebar ? updateView : () => { }} href="#profile">
                     <li>
                         <PersonIcon />
                         Profile
                     </li>
-                </a>
+                </a> */}
             </ul>
         </div>
     );

@@ -1,0 +1,85 @@
+.loginpage {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #206a79;
+
+}
+.login_container {
+  height: 350px;
+  padding: 20px;
+  display: flex;
+  border: 3px solid #206a79;
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+}
+.left_container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.login_heading {
+  font-weight: 800;
+  font-size: 32px;
+  color: #206a79;
+  margin-bottom: 2rem;
+}
+.login_form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.input_field {
+  width: 300px;
+  /* height: 50px; */
+  padding: 15px;
+  margin: 10px;
+  border: 2px solid #206a79;
+  border-radius: 10px;
+  outline: none;
+  font-size: 14px;
+}
+.signin {
+  width: 160px;
+  height: 40px;
+  color: white;
+  background: #206a79;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 25px;
+  margin: 10px;
+}
+.forgot {
+  text-decoration: none;
+  font-size: 13px;
+  color: #206a79;
+}
+.right_container {
+  width: 300px;
+  height: 100%;
+  background: #206a79;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign_up {
+  width: 150px;
+  height: 40px;
+  color: #206a79;
+  background: white;
+  font-weight: 600;
+  border: none;
+  border-radius: 25px;
+  margin: 10px;
+}
