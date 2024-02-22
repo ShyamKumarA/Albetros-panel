@@ -103,7 +103,7 @@ const Blog = ({ blogs, fetchData }) => {
                 </div>
 
             </div>
-            {addBlog && <AddBlog handleClose={closeAddModal} />}
+            {addBlog && <AddBlog handleClose={closeAddModal} fetchData={fetchData}/>}
             {deleteBlog && <DeleteBlog blogId={blogId} handleClose={closeDeleteModal} fetchData={fetchData}/>}
             {/* {editBlog && <EditBlog handleClose={closeEditModal} />} */}
 

@@ -3,17 +3,21 @@ import classes from './AddBlog.module.css'
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 
-export const AddBlog = ({ handleClose }) => {
+export const AddBlog = ({ fetchData, handleClose }) => {
 
     const [blogData, setBlogData] = useState({
         title: '',
         description: ''
     });
+    const [loading, setLoading] = useState(false);
     const [selectedFile, setSelectedFile] = useState();
-    const [sections, setSections] = useState([]);
+    const [sections, setSections] = useState([
+        {
+            subtitle:'',
+            subdescription:''
+        }
+    ]);
 
-    const [subTitle, setSubTitle] = useState('');
-    const [subDescription, setSubDescription] = useState('');
     
     // no of subfilds
     const [subtitleCount, setSubtitleCount] = useState(1);
@@ -21,30 +25,31 @@ export const AddBlog = ({ handleClose }) => {
     const handleChange = (e) => {
         setBlogData({ ...blogData, [e.target.name]: e.target.value });
     };
-    // const handleSubData = (e) => {
-    //     e.preventDefault();
-    //     setSections((prevSubData) => {
-    //         const updatedSubData = [...prevSubData, { subTitle, subDescription }];
-    //         return updatedSubData;
-    //     });
+    const handleSubTitleChange = (index, value) => {
+        const updatedSections = [...sections];
+        updatedSections[index] = { ...updatedSections[index], subtitle: value };
+        setSections(updatedSections);
+    };
 
-    //     setSubDescription('');
-    //     setSubTitle('');
-    // }
+    const handleSubDescriptionChange = (index, value) => {
+        const updatedSections = [...sections];
+        updatedSections[index] = { ...updatedSections[index], subdescription: value };
+        setSections(updatedSections);
+    };
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         setSelectedFile(file);
 
     };
+    console.log(blogData,'blogdata');
+    console.log(sections,'sections');
+    console.log(selectedFile,'selectedFile');
 
-    // const addSubtitleField = () => {
-    //     setSubtitleCount(subtitleCount + 1);
-    // };
-    const submitBlogData = async()=>{
-        // setSections((prevSubData) => {
-        //     const updatedSubData = [...prevSubData, { subTitle, subDescription }];
-        //     return updatedSubData;
-        // });
+    const addSubtitleField = () => {
+        setSubtitleCount(subtitleCount + 1);
+    };
+    const submitBlogData = async () => {
+        setLoading(true);
         const blog = new FormData();
         // Append blogData fields to formData
         blog.append('title', blogData.title);
@@ -52,31 +57,42 @@ export const AddBlog = ({ handleClose }) => {
 
         // Append selectedFile to formData
         if (selectedFile) {
-            blog.append('blogImage', selectedFile,selectedFile.name);
+            blog.append('blogImage', selectedFile, selectedFile.name);
         }
 
         // Append subData to formData
-        // sections.forEach((sub, index) => {
-        //     blog.append(`title`, sub.subTitle);
-        //     blog.append(`description`, sub.subDescription);
-        // });
-        const token = localStorage.getItem('token')
+        sections.forEach((sub, index) => {
+            blog.append(`sections[${index}][subtitle]`, sub.subtitle);
+            blog.append(`sections[${index}][subdescription]`, sub.subdescription);
+        });
+
+        const token = localStorage.getItem('token');
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
-                "content-type": "multipart/form-data",  // Correct typo here
+                "content-type": "multipart/form-data",
             }
         };
-
         try {
-            console.log(blog);
             const response = await axios.post('http://localhost:8080/api/admin/add-blog', blog, config);
             console.log(response);
-           
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false); // Stop loading regardless of success or error
+            setBlogData({
+                title: '',
+                description: '',
+            });
+            setSections([{
+                subtitle: '',
+                subdescription: ''
+            }]);
+            fetchData()
+            handleClose()
         }
     }
+
 
     return (
         <div className={classes.AddBlogModal}>
@@ -86,31 +102,29 @@ export const AddBlog = ({ handleClose }) => {
                 <div className={classes.input_container}>
                     <div className={classes.sub_container}>
                         <label htmlFor="">Title</label>
-                        <input onChange={handleChange} name="title" type="text" placeholder='Heading' />
+                        <input value={blogData.title} onChange={handleChange} name="title" type="text" placeholder='Heading' />
                         <label htmlFor="">Description</label>
-                        <textarea onChange={handleChange} name="description" type="text" placeholder='Description' />
+                        <textarea value={blogData.description} onChange={handleChange} name="description" type="text" placeholder='Description' />
                     </div>
                     {/* Render existing subtitle and subDescription fields */}
                     {[...Array(subtitleCount)].map((_, index) => (
                         <div key={index} className={classes.sub_container}>
                             <label htmlFor={`subtitle${index + 1}`}>Subtitle {index + 1}</label>
-                            <input onChange={(e) => setSubTitle(e.target.value)} name={`subtitle${index + 1}`} type="text" placeholder={`subtitle ${index + 1}`} />
+                            <input onChange={(e) => handleSubTitleChange(index, e.target.value)} name={`subtitle`} type="text" placeholder={`subtitle ${index + 1}`} />
                             <label htmlFor={`subDescription${index + 1}`}>SubDescription {index + 1}</label>
-                            <textarea onChange={(e) => setSubDescription(e.target.value)} name={`subDescription${index + 1}`} type="text" placeholder={`SubDescription ${index + 1}`} />
-                            {/* <button onClick={handleSubData}>Submit</button> */}
+                            <textarea onChange={(e) => handleSubDescriptionChange(index, e.target.value)} name={`subdescription`} type="text" placeholder={`SubDescription ${index + 1}`} />
                         </div>
                     ))}
 
-                    {/* Add new subtitle and subDescription button */}
                     <div className={classes.sub_container}>
-                        {/* <button className={classes.addField_btn} onClick={addSubtitleField}>Add Field</button> */}
+                        <button className={classes.addField_btn} onClick={addSubtitleField}>Add Field</button>
 
                         <label htmlFor="">Blog Image</label>
                         <div className={classes.choose_image}>
                             <input onChange={handleFileChange} name="image" type="file" accept="image/*" />
                         </div>
                     </div>
-                    <button onClick={submitBlogData} className={classes.ok_btn}>OK</button>
+                    <button onClick={submitBlogData} className={classes.ok_btn}>{loading?"submiting...":'OK'}</button>
                 </div>
             </div>
         </div>

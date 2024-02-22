@@ -76,10 +76,9 @@ export const adminLogin = async (req, res, next) => {
         }
         
         const { title, description, sections } = req.body;
-        
-        console.log(req.files);
+        console.log(sections);
         if(!req.files.blogImage){
-          return next(errorHandler(401, "Image not found"));
+          return next(errorHandler(401, " Image not found"));
 
         }
 
@@ -97,11 +96,13 @@ export const adminLogin = async (req, res, next) => {
           sections,
           blogImage
         });
-  
-        return res.status(201).json({
-          sts: "01",
-          msg: "Blog Added Successfully",
-        });
+        if(blog){
+          return res.status(201).json({
+            sts: "01",
+            msg: "Blog Added Successfully",
+          });
+        }
+        
       });
     } catch (error) {
       next(error);
@@ -272,3 +273,5 @@ export const deleteSingleBlog = async (req, res, next) => {
     next(error);
   }
 };
+
+

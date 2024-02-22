@@ -10,8 +10,8 @@ const blogSchema = new mongoose.Schema({
     required: true,
   },
   sections: [{
-    title: String,
-    description: String
+    subtitle: String,
+    subdescription: String
   }],
   blogImage: {
     type: String,
