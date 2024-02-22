@@ -9,10 +9,6 @@ const seoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  page: {
-    type: String,
-    required: true,
-  },
   keyWords: {
     type: String,
     required: true,

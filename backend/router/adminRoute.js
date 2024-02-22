@@ -12,13 +12,13 @@ adminRouter.post("/forgot-password", forgotPassword);
 adminRouter.post("/add-blog", protectAdmin,addBlog);
 adminRouter.post("/delete-blog/:id", protectAdmin,deleteSingleBlog);
 adminRouter.post("/add-seo", protectAdmin,addSeo);
-adminRouter.post("/edit-seo/:id", protectAdmin,editSeo);
+adminRouter.post("/edit-seo", protectAdmin,editSeo);
 
 
 
 adminRouter.get("/view-blogs", viewBlogs);
 adminRouter.get("/view-single-blog/:id", viewSingleBlog);
-adminRouter.get("/view-seo", viewSeo);
+adminRouter.get("/view-seo",viewSeo);
 
 
 

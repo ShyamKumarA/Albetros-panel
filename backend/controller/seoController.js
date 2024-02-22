@@ -6,7 +6,7 @@ import Seo from "../models/seoModel.js";
 export const addSeo = async (req, res, next) => {
     try {
         
-        const { title, description, keyWords,page } = req.body;
+        const { title, description, keyWords } = req.body;
           const adminId = req.admin._id;
           const admin = await Admin.findById(adminId);
   
@@ -17,8 +17,7 @@ export const addSeo = async (req, res, next) => {
         const seo = await Seo.create({
           title,
           description,
-          keyWords,
-          page
+          keyWords
         });
 
   if(seo){
@@ -41,8 +40,7 @@ export const addSeo = async (req, res, next) => {
   export const editSeo = async (req, res, next) => {
     try {
       const adminId = req.admin._id;
-      const { id } = req.params;
-      const { title, description, keyWords, page } = req.body;
+      const { title, description, keyWords } = req.body;
   
       // Find the admin
       const admin = await Admin.findById(adminId);
@@ -50,8 +48,8 @@ export const addSeo = async (req, res, next) => {
         return next(errorHandler(401, "Admin not found"));
       }
   
-      // Find the SEO data to edit
-      let seoData = await Seo.findById(id);
+      // Find the SEO data (assuming there is only one document)
+      let seoData = await Seo.findOne();
       if (!seoData) {
         return next(errorHandler(404, "SEO data not found"));
       }
@@ -60,20 +58,16 @@ export const addSeo = async (req, res, next) => {
       seoData.title = title || seoData.title;
       seoData.description = description || seoData.description;
       seoData.keyWords = keyWords || seoData.keyWords;
-      seoData.page = page || seoData.page;
   
       // Save the updated SEO data
       const updatedSeo = await seoData.save();
   
       // Respond with the updated SEO data
-      if(updatedSeo){
-        return res.status(200).json({
-            updatedSeo,
-            sts: "01",
-            msg: "SEO data updated successfully",
-          });
-      }
-      
+      return res.status(200).json({
+        updatedSeo,
+        sts: "01",
+        msg: "SEO data updated successfully",
+      });
   
     } catch (error) {
       next(error);
@@ -86,11 +80,6 @@ export const addSeo = async (req, res, next) => {
 
   export const viewSeo=async(req,res,next)=>{
     try {
-      const adminId = req.admin._id;
-        const admin = await Admin.findById(adminId);
-        if (!admin) {
-          return next(errorHandler(401, "Admin not found"));
-        }
       const seoData=await Seo.find()
       if(seoData){
         res.status(200).json({
