@@ -86,6 +86,11 @@ export const addSeo = async (req, res, next) => {
 
   export const viewSeo=async(req,res,next)=>{
     try {
+      const adminId = req.admin._id;
+        const admin = await Admin.findById(adminId);
+        if (!admin) {
+          return next(errorHandler(401, "Admin not found"));
+        }
       const seoData=await Seo.find()
       if(seoData){
         res.status(200).json({
