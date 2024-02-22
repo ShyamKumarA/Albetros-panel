@@ -81,3 +81,23 @@ export const addSeo = async (req, res, next) => {
   };
   
 
+//view SEO
+
+
+  export const viewSeo=async(req,res,next)=>{
+    try {
+      const seoData=await Seo.find()
+      if(seoData){
+        res.status(200).json({
+            seoData,
+          sts: "01",
+          msg: "seo data get Success",
+        });
+      }else {
+      next(errorHandler("SEOs not found"));
+    }
+  } catch (error) {
+    next(error);
+  }
+
+  }

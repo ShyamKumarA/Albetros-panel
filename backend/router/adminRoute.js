@@ -5,7 +5,7 @@ import {
     adminLogin, deleteSingleBlog, forgotPassword, viewBlogs, viewSingleBlog,
   } from "../controller/adminController.js";
 import { protectAdmin } from "../middleware/authMiddleware.js";
-import { addSeo, editSeo } from "../controller/seoController.js";
+import { addSeo, editSeo, viewSeo } from "../controller/seoController.js";
 
 adminRouter.post("/admin-login", adminLogin);
 adminRouter.post("/forgot-password", forgotPassword);
@@ -18,6 +18,7 @@ adminRouter.post("/edit-seo/:id", protectAdmin,editSeo);
 
 adminRouter.get("/view-blogs", viewBlogs);
 adminRouter.get("/view-single-blog/:id", viewSingleBlog);
+adminRouter.get("/view-seo", viewSeo);
 
 
 
