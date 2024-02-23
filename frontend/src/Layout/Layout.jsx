@@ -1,11 +1,17 @@
 import React, { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import Header from "./Header/Header";
+import { useAuth } from "../context/AuthContext";
 
 const Layout = () => {
     const [viewSidebar, setViewSidebar] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
+
+    const { isAuthenticated } = useAuth();
+    console.log(isAuthenticated);
+    if (!isAuthenticated) {
+        return <Navigate to="/" />;
+    }
 
     const updateView = () => {
         setViewSidebar(!viewSidebar);

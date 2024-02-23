@@ -5,8 +5,13 @@ import ArticleIcon from '@mui/icons-material/Article';
 import AddLinkIcon from '@mui/icons-material/AddLink';
 import PersonIcon from '@mui/icons-material/Person';
 import CloseIcon from '@mui/icons-material/Close';
+import { Link, useLocation } from "react-router-dom";
 const Sidebar = ({ viewSidebar, updateView }) => {
-
+    const location = useLocation();
+    const isLinkActive = (pathname, hash) => {
+        // Check if the current pathname and hash match the given values
+        return location.pathname === pathname && location.hash === hash;
+    };
     return (
         <div className={viewSidebar ? "show-sidebar" : "sidebar"}>
             <div className={viewSidebar ? "viewSidebar" : ""}>
@@ -19,26 +24,26 @@ const Sidebar = ({ viewSidebar, updateView }) => {
             </div>
 
             <ul className="navlinks">
-                <a onClick={viewSidebar ? updateView : () => { }} href="/dashboard">
-                    <li>
+                <Link onClick={viewSidebar ? updateView : () => { }} to="/dashboard">
+                    <li className={isLinkActive('/dashboard', '') ? 'selected' : ''}>
                         <DashboardIcon />
                         Dashboard
                     </li>
-                </a>
-                <a onClick={viewSidebar ? updateView : () => {
+                </Link>
+                <Link onClick={viewSidebar ? updateView : () => {
 
-                }} href="#blogs">
-                    <li>
+                }} to="/dashboard#blogs">
+                    <li className={isLinkActive('/dashboard', '#blogs') ? 'selected' : ''}>
                         <ArticleIcon />
                         Blog
                     </li>
-                </a>
-                <a onClick={viewSidebar ? updateView : () => { }} href="#seo">
-                    <li>
+                </Link>
+                <Link onClick={viewSidebar ? updateView : () => { }} to="/seo">
+                    <li className={isLinkActive('/seo', '') ? 'selected' : ''}>
                         <AddLinkIcon />
                         SEO
                     </li>
-                </a>
+                </Link>
                 {/* <a onClick={viewSidebar ? updateView : () => { }} href="#profile">
                     <li>
                         <PersonIcon />

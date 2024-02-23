@@ -2,7 +2,10 @@ import "./Header.css";
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from "react-router-dom";
+import { useAuth } from '../../context/AuthContext';
+
 const Header = ({ setViewSidebar, viewSidebar }) => {
+  const { logout } = useAuth();
   const navigate = useNavigate()
   const handleClick = () => {
     setViewSidebar(!viewSidebar);
@@ -10,6 +13,7 @@ const Header = ({ setViewSidebar, viewSidebar }) => {
   const handleLogout=()=>{
     localStorage.removeItem("token");
     navigate('/')
+    logout()
   }
 
   return (

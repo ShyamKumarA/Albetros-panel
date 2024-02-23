@@ -6,6 +6,9 @@
   background-color:#206a79;
   padding-top: 20px;
 }
+.navlinks li.selected {
+  color: #27dde3; /* Set your desired color */
+}
 
 .show-sidebar {
   position: absolute;

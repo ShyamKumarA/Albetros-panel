@@ -1,7 +1,6 @@
 import AddBlog from '../AddBlog/AddBlog';
 import './Blog.css'
 import React, { useState } from 'react';
-
 // import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import DeleteBlog from '../DeleteBlog/DeleteBlog';
@@ -14,8 +13,7 @@ const Blog = ({ blogs, fetchData }) => {
     const [blogId,setBlogId]=useState()
     const [deleteBlog, setDeleteBlog] = useState(false)
 
-    // handle blog add modal
-    
+    // handle blog add modal 
     const OpenAddModal = () => {
         setAddBlog(true);
     }
@@ -25,7 +23,6 @@ const Blog = ({ blogs, fetchData }) => {
     }
 
     // handle blog delete modal
-
     const OpenDeleteModal = (Id) => {
         setDeleteBlog(true);
         setBlogId(Id)
@@ -71,30 +68,7 @@ const Blog = ({ blogs, fetchData }) => {
                                 <DeleteIcon onClick={() => OpenDeleteModal(blog._id)} style={{ color: "red" }} /></td>
                             </tr>
                             ))}
-                            {/* <tr>
-                                <td>1</td>
-                                <td>something</td>
-                                <td>Description</td>
-                                <td>
-                                    <EditIcon style={{ color: "blue" }} />
-                                    <DeleteIcon onClick={() => OpenDeleteModal(1)} style={{ color: "red" }} /></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>something</td>
-                                <td>Description</td>
-                                <td>
-                                    <EditIcon style={{ color: "blue" }} />
-                                    <DeleteIcon style={{ color: "red" }} /></td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>something</td>
-                                <td>Description</td>
-                                <td>
-                                    <EditIcon style={{ color: "blue" }} />
-                                    <DeleteIcon style={{ color: "red" }} /></td>
-                            </tr> */}
+                           
                           
                         </tbody>
 
