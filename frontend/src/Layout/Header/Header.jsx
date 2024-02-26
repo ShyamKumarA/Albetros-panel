@@ -20,7 +20,7 @@ const Header = ({ setViewSidebar, viewSidebar }) => {
     <>
       <div className="header">
         <div className="header-items">
-          <input type="text" placeholder="search" />
+          {/* <input type="text" placeholder="search" /> */}
           <div onClick={handleLogout} className="log_out"><LogoutIcon style={{color:"red"}}/></div>
           <div onClick={handleClick} className="menu-button">
             <MenuIcon />

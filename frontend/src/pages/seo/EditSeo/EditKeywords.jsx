@@ -3,15 +3,13 @@ import classes from './EditSeo.module.css'
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 
-export const EditSeo = ({ fetchSeoData, handleClose }) => {
+export const EditKeywords = ({ fetchSeoData, handleClose }) => {
 
     const [seoData, setSeoData] = useState({
-        title: '',
-        description: '',
-        // keyWords: ''
+        keyWords: ''
     });
     const [loading, setLoading] = useState(false);
-  
+
 
     const handleChange = (e) => {
         setSeoData({ ...seoData, [e.target.name]: e.target.value });
@@ -23,7 +21,7 @@ export const EditSeo = ({ fetchSeoData, handleClose }) => {
         const config = {
             headers: {
                 Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json", 
+                "Content-Type": "application/json",
             }
         };
         try {
@@ -34,11 +32,9 @@ export const EditSeo = ({ fetchSeoData, handleClose }) => {
         } finally {
             setLoading(false); // Stop loading regardless of success or error
             setSeoData({
-                title: '',
-                description: '',
-                // keyWords: ''
+                keyWords: ''
             });
-         
+
             fetchSeoData()
             handleClose()
         }
@@ -48,18 +44,18 @@ export const EditSeo = ({ fetchSeoData, handleClose }) => {
     return (
         <div className={classes.AddBlogModal}>
             <div className={classes.popup}>
-                <h1>Edit Seo</h1>
+                <h1>Edit Keywords</h1>
                 <div className={classes.popup_closer} onClick={handleClose}><CloseIcon /></div>
                 <div className={classes.input_container}>
                     <div className={classes.sub_container}>
-                        <label htmlFor="">Title</label>
+                        {/* <label htmlFor="">Title</label>
                         <input value={seoData.title} onChange={handleChange} name="title" type="text" placeholder='Heading' />
                         <label htmlFor="">Description</label>
-                        <textarea value={seoData.description} onChange={handleChange} name="description" type="text" placeholder='Description' />
-                        {/* <label htmlFor="">keywords</label>
-                        <textarea value={seoData.keyWords} onChange={handleChange} name="keyWords" type="text" placeholder='Description' /> */}
+                        <textarea value={seoData.description} onChange={handleChange} name="description" type="text" placeholder='Description' /> */}
+                        <label htmlFor="">keywords</label>
+                        <textarea value={seoData.keyWords} onChange={handleChange} name="keyWords" type="text" placeholder='keywords' />
                     </div>
-            
+
                     <button onClick={handleSubmit} className={classes.ok_btn}>{loading ? "submiting..." : 'OK'}</button>
                 </div>
             </div>
@@ -67,4 +63,4 @@ export const EditSeo = ({ fetchSeoData, handleClose }) => {
     );
 };
 
-export default EditSeo;
+export default EditKeywords;
