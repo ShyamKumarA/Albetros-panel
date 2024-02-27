@@ -27,7 +27,7 @@ export const AddSeo = ({ fetchData, handleClose }) => {
             }
         };
         try {
-            const response = await axios.post('http://localhost:8080/api/admin/add-seo', seoData, config);
+            const response = await axios.post('https://app.albetros.com/api/admin/add-seo', seoData, config);
             console.log(response);
         } catch (error) {
             console.error('Error fetching data:', error);

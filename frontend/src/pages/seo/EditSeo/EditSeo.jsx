@@ -3,13 +3,10 @@ import classes from './EditSeo.module.css'
 import CloseIcon from '@mui/icons-material/Close';
 import axios from "axios";
 
-export const EditSeo = ({ fetchSeoData, handleClose }) => {
+export const EditSeo = ({ fetchSeoData, handleClose, pageData }) => {
 
-    const [seoData, setSeoData] = useState({
-        title: '',
-        description: '',
-        // keyWords: ''
-    });
+    const [seoData, setSeoData] = useState(pageData);
+
     const [loading, setLoading] = useState(false);
   
 
@@ -27,7 +24,7 @@ export const EditSeo = ({ fetchSeoData, handleClose }) => {
             }
         };
         try {
-            const response = await axios.post(`http://localhost:8080/api/admin/edit-seo`, seoData, config);
+            const response = await axios.post(`https://app.albetros.com/api/admin/edit-seo/${pageData._id}`, seoData, config);
             console.log(response);
         } catch (error) {
             console.error('Error fetching data:', error);
@@ -53,9 +50,9 @@ export const EditSeo = ({ fetchSeoData, handleClose }) => {
                 <div className={classes.input_container}>
                     <div className={classes.sub_container}>
                         <label htmlFor="">Title</label>
-                        <input value={seoData.title} onChange={handleChange} name="title" type="text" placeholder='Heading' />
+                        <input value={seoData?.title} onChange={handleChange} name="title" type="text" placeholder='Heading' />
                         <label htmlFor="">Description</label>
-                        <textarea value={seoData.description} onChange={handleChange} name="description" type="text" placeholder='Description' />
+                        <textarea value={seoData?.description} onChange={handleChange} name="description" type="text" placeholder='Description' />
                         {/* <label htmlFor="">keywords</label>
                         <textarea value={seoData.keyWords} onChange={handleChange} name="keyWords" type="text" placeholder='Description' /> */}
                     </div>

@@ -16,7 +16,7 @@ const Dashboard = () => {
   // get blog datas
   const fetchData = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/api/admin/view-blogs');
+      const response = await axios.get('https://app.albetros.com/api/admin/view-blogs');
       setBlogs(response.data.blogData)
       setNumberblogs(response.data.blogCount)
     } catch (error) {

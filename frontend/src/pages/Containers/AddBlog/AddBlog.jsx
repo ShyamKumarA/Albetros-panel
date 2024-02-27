@@ -74,7 +74,7 @@ export const AddBlog = ({ fetchData, handleClose }) => {
             }
         };
         try {
-            const response = await axios.post('http://localhost:8080/api/admin/add-blog', blog, config);
+            const response = await axios.post('https://app.albetros.com/api/admin/add-blog', blog, config);
             console.log(response);
         } catch (error) {
             console.error('Error fetching data:', error);

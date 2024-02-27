@@ -13,7 +13,7 @@ const token = await localStorage.getItem('token')
                 "content-type":"application/json",
             }
         }
-        axios.post(`http://localhost:8080/api/admin/delete-blog/${blogId}`,{},config)
+        axios.post(`https://app.albetros.com/api/admin/delete-blog/${blogId}`,{},config)
             .then((response) => {
                 console.log(response.data);
                 fetchData()

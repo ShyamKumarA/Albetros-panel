@@ -10,7 +10,7 @@ const Forgot = () => {
     const handlesubmit = (e) => {
         e.preventDefault()
 
-        axios.post("http://localhost:8080/api/admin/forgot-password", userDatails)
+        axios.post("https://app.albetros.com/api/admin/forgot-password", userDatails)
             .then((response) => {
                 console.log(response);
 

@@ -13,7 +13,7 @@ const Login = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:8080/api/admin/admin-login", loginData)
+        axios.post("https://app.albetros.com/api/admin/admin-login", loginData)
             .then((response) => {
                 localStorage.setItem("token", response?.data?.access_token);
                 login()
