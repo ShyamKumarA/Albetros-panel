@@ -9,7 +9,7 @@ const seoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  keyWords: {
+  page: {
     type: String,
     required: true,
   }
