@@ -15,7 +15,7 @@ const Forgot = () => {
                 console.log(response);
 
 
-                navigate("/");
+                navigate("/dashboard");
             })
             .catch((error) => {
                 console.error("Error during login request:", error);

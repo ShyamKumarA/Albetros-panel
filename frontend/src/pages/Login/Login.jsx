@@ -51,11 +51,11 @@ const Login = () => {
                             placeholder=" Password"
                         />
                         <p style={{ color: "red" }}>{loginStatus}</p>
-                        <div>
+                        {/* <div>
                             <a className={classes.forgot} href="/forgot">
                                 Forgot Password
                             </a>
-                        </div>
+                        </div> */}
                         <button type="submit" className={classes.signin}>
                             Login
                         </button>

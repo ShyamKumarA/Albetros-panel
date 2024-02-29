@@ -3,6 +3,7 @@ import "./sidebar.css";
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ArticleIcon from '@mui/icons-material/Article';
 import AddLinkIcon from '@mui/icons-material/AddLink';
+import LockResetIcon from '@mui/icons-material/LockReset';
 import PersonIcon from '@mui/icons-material/Person';
 import CloseIcon from '@mui/icons-material/Close';
 import { Link, useLocation } from "react-router-dom";
@@ -30,18 +31,24 @@ const Sidebar = ({ viewSidebar, updateView }) => {
                         Dashboard
                     </li>
                 </Link>
-                <Link onClick={viewSidebar ? updateView : () => {
+                {/* <Link onClick={viewSidebar ? updateView : () => {
 
                 }} to="/dashboard#blogs">
                     <li className={isLinkActive('/dashboard', '#blogs') ? 'selected' : ''}>
                         <ArticleIcon />
                         Blog
                     </li>
-                </Link>
+                </Link> */}
                 <Link onClick={viewSidebar ? updateView : () => { }} to="/seo">
                     <li className={isLinkActive('/seo', '') ? 'selected' : ''}>
                         <AddLinkIcon />
                         SEO
+                    </li>
+                </Link>
+                <Link onClick={viewSidebar ? updateView : () => { }} to="/forgot">
+                    <li className={isLinkActive('/seo', '') ? 'selected' : ''}>
+                        < LockResetIcon />
+                        Change Password
                     </li>
                 </Link>
                 {/* <a onClick={viewSidebar ? updateView : () => { }} href="#profile">

@@ -17,6 +17,10 @@ const blogSchema = new mongoose.Schema({
     type: String,
     default: null,
   },
+  advImage:{
+    type: String,
+    default: null,
+  }
 });
 
 const Blog = mongoose.model("Blog", blogSchema);
