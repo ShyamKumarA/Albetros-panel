@@ -6,6 +6,7 @@ import AddLinkIcon from '@mui/icons-material/AddLink';
 import LockResetIcon from '@mui/icons-material/LockReset';
 import PersonIcon from '@mui/icons-material/Person';
 import CloseIcon from '@mui/icons-material/Close';
+import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link, useLocation } from "react-router-dom";
 const Sidebar = ({ viewSidebar, updateView }) => {
     const location = useLocation();
@@ -46,17 +47,18 @@ const Sidebar = ({ viewSidebar, updateView }) => {
                     </li>
                 </Link>
                 <Link onClick={viewSidebar ? updateView : () => { }} to="/forgot">
-                    <li className={isLinkActive('/seo', '') ? 'selected' : ''}>
+                    <li className={isLinkActive('/forgot', '') ? 'selected' : ''}>
                         < LockResetIcon />
                         Change Password
                     </li>
                 </Link>
-                {/* <a onClick={viewSidebar ? updateView : () => { }} href="#profile">
-                    <li>
-                        <PersonIcon />
-                        Profile
+                <Link onClick={viewSidebar ? updateView : () => { }} to="/notification">
+                    <li className={isLinkActive('/notification', '') ? 'selected' : ''}>
+                        < NotificationsIcon/>
+                        Notification
                     </li>
-                </a> */}
+                </Link>
+                
             </ul>
         </div>
     );
