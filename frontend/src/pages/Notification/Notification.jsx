@@ -16,7 +16,7 @@ console.log();
 
     const fetchData = async () => {
         try {
-            const response = await axios.get('http://localhost:6005/api/admin/view-adv-image');
+            const response = await axios.get('https://app.albetros.com/api/admin/view-adv-image');
             console.log(response.data.advImage);
             setNotificationImg(response.data.advImage)
 
@@ -41,7 +41,7 @@ console.log();
             formData.append("advImage", selectedFile, selectedFile.name);
 
             try {
-                const response = await axios.post('http://localhost:6005/api/admin/post-adv-image', formData, config);
+                const response = await axios.post('https://app.albetros.com/api/admin/post-adv-image', formData, config);
                 console.log(response);
                 fetchData()
             } catch (error) {
@@ -64,7 +64,7 @@ console.log();
             },
         };
         try {
-            const response = await axios.post('http://localhost:6005/api/admin/delete-adv-image', {}, config);
+            const response = await axios.post('https://app.albetros.com/api/admin/delete-adv-image', {}, config);
             console.log(response.data?.seoData);
             setNotificationImg();
         } catch (error) {
@@ -85,7 +85,7 @@ console.log();
             <h2 className={classes.heading}>Notification</h2>
 
             <div className={classes.image_Container}>
-                {notificationImg ? (<><img className={classes.uploaded_img} src={`http://localhost:6005/uploads/${notificationImg}`} alt="ad" /> <DeleteIcon onClick={DeleteData} className={classes.delete_icon}/> </>) :
+                {notificationImg ? (<><img className={classes.uploaded_img} src={`https://app.albetros.com/uploads/${notificationImg}`} alt="ad" /> <DeleteIcon onClick={DeleteData} className={classes.delete_icon}/> </>) :
                     (<div className={classes.upload_container}>
                         <label htmlFor="imageUpload" className={classes.documentLabel}>
                             Select Document
