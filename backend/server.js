@@ -16,7 +16,7 @@ app.use(cookieParser());
 
 app.use("/api/admin", adminRouter);
 
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static("/var/www/seclob/albertos/app/uploads"));
 
 
 app.use((err, req, res, next) => {
